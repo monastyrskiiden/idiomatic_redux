@@ -1,16 +1,18 @@
 import { v4 } from 'node-uuid';
 
-export const addTodo = text => {
-  return {
-    type: 'ADD_TODO',
-    id: v4(),
-    text
-  };
-};
+export const recieveTodos = (filter, response) => ({
+  type: 'RECEIVE_TODOS',
+  filter,
+  response
+});
 
-export const toggleTodo = id => {
-  return {
-    type: 'TOGGLE_TODO',
-    id
-  };
-};
+export const addTodo = text => ({
+  type: 'ADD_TODO',
+  id: v4(),
+  text
+});
+
+export const toggleTodo = id => ({
+  type: 'TOGGLE_TODO',
+  id
+});
