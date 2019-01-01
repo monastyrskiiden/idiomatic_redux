@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../actions';
 import { getVisibleTodos } from '../reducers/index';
-import { fetchTodos } from '../api/index';
 import TodoList from './TodoList';
 
 class VisibleTodoList extends Component {
@@ -18,8 +17,8 @@ class VisibleTodoList extends Component {
   }
 
   fetchData() {
-    const { filter, recieveTodos } = this.props;
-    fetchTodos(filter).then(todos => recieveTodos(filter, todos));
+    const { filter, fetchTodos } = this.props;
+    fetchTodos(filter);
   }
 
   render() {
