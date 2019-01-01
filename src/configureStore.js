@@ -1,7 +1,5 @@
 import { createStore } from 'redux';
 import todoApp from './reducers';
-import { loadState, saveState } from './localStorage';
-import throttle from 'lodash/throttle';
 
 const addLiggingToDispatch = store => {
   const rawDispatch = store.dispatch;
@@ -21,18 +19,11 @@ const addLiggingToDispatch = store => {
 };
 
 const configureStore = () => {
-  const persistedState = loadState();
-  const store = createStore(todoApp, persistedState);
+  const store = createStore(todoApp);
 
   if (process.env.NODE_ENV !== 'production') {
     store.dispatch = addLiggingToDispatch(store);
   }
-
-  store.subscribe(
-    throttle(() => {
-      saveState({ todos: store.getState().todos });
-    }, 1000)
-  );
 
   return store;
 };
